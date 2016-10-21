@@ -8,17 +8,19 @@ from pycgi.handler import CGIHTTPRequestHandler
 class MainHandler(CGIHTTPRequestHandler):
 
     def do_GET(self):
+        message = "----Headers-----\n"
+        for header in self.headers:
+            message += header+"=>"+self.headers.get(header)
+        message += "\n-----ENV-----\n"
+        for x in os.environ:
+            message += x+"=>"+os.getenv(x)
+        message += "\n-----BODY-----\n"
+        message += self.rfile.read()
+
         self.send_response(200)
         self.send_header("Content-Type","text/plain")
         self.end_headers()
-        self.wfile.write("----Headers-----")
-        for header in self.headers:
-            self.wfile.write(header+"=>"+self.headers.get(header))
-        self.wfile.write("\n-----ENV-----")
-        for x in os.environ:
-            self.wfile.write(x+"=>"+os.getenv(x))
-        self.wfile.write("\n-----BODY-----")
-        self.wfile.write(self.rfile.read())
+        self.wfile.write(message)
 
 handler = MainHandler(None,os.getenv("REMOTE_ADDR"),None)
 
