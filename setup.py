@@ -7,6 +7,6 @@ setup(name='PyCGI',
       description='Python CGI handler for Apache',
       author='James Jones',
       author_email='james.voip@gmail.com',
-      url='https://www.python.org/sigs/distutils-sig/',
-      packages=['distutils', 'distutils.command'],
+      url='http://outcast.github.io/pycgi/',
+      packages=['pycgi'],
       )
