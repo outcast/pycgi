@@ -119,7 +119,7 @@ class CGIHTTPRequestHandler(BaseHTTPRequestHandler):
         """
 
         self.log_message('"%s %s %s" %s %s',
-                         self.command, self., str(code), str(size))
+                         self.command, self.path, self.request_version, str(code), str(size))
 
     def address_string(self):
         return os.getenv("HTTP_HOST")
