@@ -27,9 +27,9 @@ class CGIHTTPRequestHandler(BaseHTTPRequestHandler):
         headers = {}
         print "Content-Type: text/plain\n"
         for env in os.environ:
-            print env
             if env.startswith("HTTP_"):
                 headers[env.replace("HTTP_","")] = os.getenv(env)
+        print headers
         exit()
 
 
