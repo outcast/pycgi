@@ -25,12 +25,10 @@ class CGIHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def get_headers(self):
         headers = {}
-        print "Content-Type: text/plain\n"
         for env in os.environ:
             if env.startswith("HTTP_"):
                 headers[env.replace("HTTP_","")] = os.getenv(env)
-        print headers
-        exit()
+        return headers
 
 
     def parse_request(self):
