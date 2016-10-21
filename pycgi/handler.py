@@ -26,7 +26,7 @@ class CGIHTTPRequestHandler(BaseHTTPRequestHandler):
     def get_headers(self):
         headers = {}
         for env in os.environ:
-            if env.starswith("HTTP_"):
+            if env.startswith("HTTP_"):
                 headers[env.replace("HTTP_","")] = os.getenv(env)
 
 
