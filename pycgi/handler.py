@@ -32,8 +32,8 @@ class CGIHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def parse_request(self):
         self.command = os.getenv("REQUEST_METHOD")
-        self.path = os.getenv("REQUEST_METHOD")
-        self.request_version = os.getenv("REQUEST_METHOD")
+        self.path = os.getenv("REQUEST_URI")
+        self.request_version = os.getenv("SERVER_PROTOCOL")
 
         # Examine the headers and look for a Connection directive
         self.headers = self.get_headers()
@@ -109,6 +109,17 @@ class CGIHTTPRequestHandler(BaseHTTPRequestHandler):
         """Send the blank line ending the MIME headers."""
         if self.request_version != 'HTTP/0.9':
             self.wfile.write("\r\n")
+
+
+    def log_request(self, code='-', size='-'):
+        """Log an accepted request.
+
+        This is called by send_response().
+
+        """
+
+        self.log_message('"%s %s %s" %s %s',
+                         self.command, self., str(code), str(size))
 
     def address_string(self):
         return os.getenv("HTTP_HOST")
